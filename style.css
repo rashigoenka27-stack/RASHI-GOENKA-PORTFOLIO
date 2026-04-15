@@ -1,0 +1,109 @@
+/* style.css */
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    background-color: #09090b; /* Zinc-950 equivalent */
+    color: #fff;
+    overflow-x: hidden; 
+    overflow-y: auto; 
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.5;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+        display: none;
+    }
+}
+
+/* --- MOBILE MENU FIX --- */
+/* This ensures the menu stays hidden off-screen until GSAP triggers it. 
+   We remove the CSS transitions here to let GSAP handle 100% of the movement. */
+#menu {
+    transform: translateX(100%);
+    will-change: transform;
+}
+
+/* --- SKILLS PAGE FIXES --- */
+
+/* 1. Remove the CSS transition from progress-bar 
+      GSAP handles the timing, so CSS shouldn't interfere */
+.progress-bar {
+    width: 0; /* Start at 0 */
+    will-change: width; /* Optimization for smoother animation */
+}
+
+/* 2. Ensure the container (the track) is visible */
+.skill-item .bg-zinc-900 {
+    background-color: rgba(39, 39, 42, 1); /* Makes the "empty" part of the bar visible */
+}
+
+/* -------------------------- */
+
+/* Work Cards */
+.work-card {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+    background: rgba(20, 20, 20, 0.6);
+}
+
+.work-card:hover {
+    transform: scale(0.98);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Navigation & Menu */
+nav {
+    transition: background 0.3s ease, padding 0.3s ease;
+}
+
+nav a, #menu a {
+    letter-spacing: 0.1em;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3.5rem !important;
+        line-height: 1 !important;
+    }
+    .work-card:hover {
+        transform: none;
+    }
+}
+
+/* Selection highlight */
+::selection {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+    display: none;
+}
+html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
